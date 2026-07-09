@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <b>An AI companion framework that grows with people, relationships, and expertise over time</b>
+  <b>AI-human Alignment and Cooperation: enabling AI to learn cooperation through long-term alignment</b>
 </p>
 
 <p align="center">
@@ -16,25 +16,23 @@
   <b>Technical Report:</b> Coming soon
 </p>
 
-AICO explores a simple idea: AI should not only answer what you just said, but gradually understand who you are, who you are talking to, what matters between you, and how conversations should evolve over time.
+AICO stands for **AI-human Alignment and Cooperation**. It does not simply explore how to make AI "remember more things"; it explores how AI can gradually align with people through long-term interaction, and then form more natural, reliable, and context-aware cooperation on top of that alignment.
 
-The project aims to make AI feel less like a stateless tool and more like a long-term collaborator: one that can learn personal preferences, adapt to different relationships, support expert workflows, and improve through human feedback.
+Our vision is to move AI from a tool that only replies instantly toward a collaborator that can understand people, relationships, goals, and long-term tasks shared with either personal users or professional experts. AICO focuses not only on memory storage, but on alignment and the cooperative interaction that follows: AI should know who it is serving, who it is currently interacting with, what the current relationship and goal are, and what expression or action is more appropriate next.
 
 ---
 
 ## Why AICO
 
-Most AI assistants respond mainly to the latest message. AICO explores a different direction: an AI system should become more aligned as it interacts with a person or expert over time.
+Most AI assistants respond mainly to "the latest message." AICO explores a different direction: AI should form continuous alignment with people through long-term interaction, and then enter a cooperative state based on that alignment. For personal users, it needs to understand the user themself, their relationship network, and their everyday expression strategies. For experts, it needs to learn the expert's professional logic, service process, and decision style.
 
 ```text
 Long-term interaction
-  -> personal or expert profile
-  -> owner-private relationship graph
-  -> dynamic topic graph
-  -> dialogue strategy tree
-  -> retrieval-augmented response
-  -> feedback and confirmation
-  -> iterative update
+  -> AI-human alignment
+  -> personal or expert cooperation
+  -> relationship-aware context
+  -> strategy-guided dialogue
+  -> feedback-driven evolution
 ```
 
 AICO focuses on four questions:
@@ -44,13 +42,13 @@ AICO focuses on four questions:
 | Who is the aligned subject? | The user themself in PERSONAL mode, or the expert in EXPERT mode. |
 | Who is the current interaction partner? | A friend, family member, colleague, self-dialogue partner, or client. |
 | What is the current topic and multi-turn purpose? | The dynamic topic, intent, relation context, and dialogue stage. |
-| How should the system evolve? | Profiles, relationship graph, knowledge, strategy trees, and confirmation records are updated over time. |
+| How should AI cooperate and iterate? | Profiles, relationship graph, knowledge, strategy trees, and confirmation records are continuously updated during cooperation. |
 
 ---
 
 ## Core Idea
 
-AICO is built around a write/read alignment loop.
+AICO is built around an "alignment-cooperation-iteration" loop: the system first updates its understanding of people from interaction, then reads back relevant context in the next interaction to support more appropriate replies, suggestions, or expert decisions.
 
 ```text
 WRITE -- update alignment state                     READ -- generate aligned context
@@ -156,9 +154,9 @@ AICO's rule of thumb:
 
 ```text
 aico/
-├── api/                 # Shared schemas and AICOOrchestrator
-├── alignment/           # Topic extraction, topic graph, embedding, iteration jobs
-├── perception/          # Personal state, profile service, relationship graph
+├── api/                 # Shared protocols and AICOOrchestrator entry point
+├── alignment/           # Topic extraction, topic graph, vector similarity, iteration jobs
+├── perception/          # Profiles, personal state, and relationship graph
 ├── decision/            # Thought tree and strategy tree runtime
 ├── knowledge/           # Retrieval and multi-source RAG
 ├── evaluation/          # Response and feedback evaluation
@@ -280,14 +278,6 @@ Embedding currently uses a deterministic local implementation for development an
 | Expert confirmation workflow | Complete candidate topic/tree/node confirmation in expert workbench |
 | Persistent backend | Move JSON state toward database or event-stream persistence |
 | LLM extraction | Replace local fallback with stronger structured extraction and production embeddings |
-
----
-
-## Development Notes
-
-- Current active development directory: `AICO/aico`.
-- Earlier April code is preserved as reference material and is being reorganized into AICO naming and architecture.
-- Legacy names such as `SynergyAdvisor`, `Digital-avatar`, and `meta_ware_user` should be treated as historical names and gradually unified under `AICO`.
 
 ---
 
