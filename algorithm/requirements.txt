@@ -1,0 +1,5 @@
+﻿# AICO algorithm package currently uses Python standard library only.
+# Keep this file intentionally small for the public research preview.
+#
+# Optional local development:
+pytest>=8.0

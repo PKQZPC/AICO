@@ -1,0 +1,102 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Local AICO state
+storage/data/
+*.local.json
+*.state.json
+tests/_tmp_*.json
+data/
+runtime/
+tmp/
+temp/
+uploads/
+exports/
+checkpoints/
+
+# Legacy/reference assets kept out of public releases because they may contain
+# old local endpoints, generated files, or historical credentials.
+algorithm/backend_mock/
+legacy/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Backend / Java
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-local.yaml
+backend/src/main/resources/application-*.local.yml
+backend/src/main/resources/application-*.local.yaml
+backend/src/main/resources/application-prod.yml
+backend/src/main/resources/application-prod.yaml
+backend/src/main/resources/application-production.yml
+backend/src/main/resources/application-production.yaml
+*.class
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+.envrc
+*.secret
+*.secrets
+*.key
+*.pem
+*.p12
+*.jks
+*.crt
+*.csr
+
+# Generated / binary research artifacts
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql
+*.bak
+*.tmp
+*.cache
+*.parquet
+*.feather
+*.csv
+*.tsv
+*.jpg
+*.jpeg
+*.png
+!assets/AICO2.png
+*.mp3
+*.wav
+*.mp4
+
+# Logs
+*.log
+logs/

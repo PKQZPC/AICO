@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aico"
+version = "0.1.0a0"
+description = "AI-human alignment and cooperation framework for long-term personal and expert interactions."
+requires-python = ">=3.11"
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = []
+
+[tool.setuptools]
+package-dir = { "aico" = "." }
+packages = [
+  "aico",
+  "aico.alignment",
+  "aico.api",
+  "aico.decision",
+  "aico.evaluation",
+  "aico.generation",
+  "aico.knowledge",
+  "aico.memory",
+  "aico.perception",
+  "aico.storage"
+]

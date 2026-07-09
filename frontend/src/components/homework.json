@@ -1,0 +1,290 @@
+{
+  "tree_id": "homework",
+  "tree_name": "作业决策树",
+  
+  "root": {
+    "node_id": "node_root",
+    "node_type": "decision",
+    "label": "作业问题"
+  },
+  
+  "node_registry": [
+    {
+      "node_id": "node_root",
+      "node_type": "decision",
+      "label": "作业问题",
+      "status": "to_be_confirm",
+      "source_content": "生成的上下文内容",
+      "node_content": "评估用户是否表现出焦虑症状",
+      "inference_relationship": "初步判断是否需要进一步评估焦虑严重程度",
+      
+      "children": [
+        {
+          "relationship": "solid",
+          "node_id": "2.1"
+        },
+        {
+          "relationship": "dashed",
+          "node_id": "2.2"
+        },
+        {
+          "relationship": "dashed",
+          "node_id": "2.3"
+        }
+      ]
+    },
+    
+    {
+      "node_id": "2.1",
+      "node_type": "decision",
+      "label": "写作业拖拉磨蹭怎么办",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？",
+      "inference_relationship": "具体症状和持续时间是评估焦虑等级的关键指标",
+      
+      "children": [
+        {
+          "relationship": "solid",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.1"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.2"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.3"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.4"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.5"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.6"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.7"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.8"
+        }
+      ]
+    },
+    {
+      "node_id": "2.1.1",
+      "node_type": "decision",
+      "label": "儿童天生如此，反应性低，社会抑制性强",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.2",
+      "node_type": "decision",
+      "label": "你妈觉得你蹭",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.3",
+      "node_type": "decision",
+      "label": "父母错误行为导致儿童用蹭来对付",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.4",
+      "node_type": "decision",
+      "label": "学习基础差,对学习没自信,没兴趣，没成就感",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.5",
+      "node_type": "decision",
+      "label": "时间观念差",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？",
+      "inference_relationship": "具体症状和持续时间是评估焦虑等级的关键指标",
+      
+      "children": [
+        {
+          "relationship": "solid",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.5.1"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.5.2"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.1.5.3"
+        }
+      ]
+    },
+    {
+      "node_id": "2.1.5.1",
+      "node_type": "decision",
+      "label": "寒暑假定时间计划",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.5.2",
+      "node_type": "decision",
+      "label": "一分钟专项训练",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.5.3",
+      "node_type": "decision",
+      "label": "使用番茄钟",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.6",
+      "node_type": "decision",
+      "label": "条理性差,写作业没顺序",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.7",
+      "node_type": "decision",
+      "label": "动机不足，没成就感;",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.1.8",
+      "node_type": "decision",
+      "label": "家庭环境有问题;",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.2",
+      "node_type": "decision",
+      "label": "写作业畏难怎么办",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？",
+      "inference_relationship": "具体症状和持续时间是评估焦虑等级的关键指标",
+      
+      "children": [
+        {
+          "relationship": "solid",
+          "edge_label": "用户提供详情",
+          "node_id": "2.2.1"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.2.2"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.2.3"
+        }
+      ]
+    },
+    {
+      "node_id": "2.2.1",
+      "node_type": "decision",
+      "label": "存在习得性无助-一合理要求",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.2.2",
+      "node_type": "decision",
+      "label": "无法开始--小步子得成绩",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.2.3",
+      "node_type": "decision",
+      "label": "缺乏正确的沟通方式",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.3",
+      "node_type": "decision",
+      "label": "写作业专注力不行怎么办?",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？",
+      "inference_relationship": "具体症状和持续时间是评估焦虑等级的关键指标",
+      
+      "children": [
+        {
+          "relationship": "solid",
+          "edge_label": "用户提供详情",
+          "node_id": "2.3.1"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.3.2"
+        },
+        {
+          "relationship": "dashed",
+          "edge_label": "用户提供详情",
+          "node_id": "2.3.3"
+        }
+      ]
+    },
+    {
+      "node_id": "2.3.1",
+      "node_type": "decision",
+      "label": "学习环境不好:扫除障碍法",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.3.2",
+      "node_type": "decision",
+      "label": "中间会休息吗?中途休息法",
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    },
+    {
+      "node_id": "2.3.3",
+      "node_type": "decision",
+
+      
+      "node_content": "询问症状的具体表现和持续时间",
+      "prompt_template": "您能否描述症状的具体表现？这些症状持续了多久？"
+    }
+  ],
+  
+  "metadata": {
+    "version": "2.0.0",
+    "generate_time": "2025-04-11T00:00:00+08:00",
+    "design_scope": {
+      "applicable_scenarios": ["在线咨询", "自评工具", "客服系统"],
+      "excluded_scenarios": ["紧急危机干预"]
+    },
+    "author": "clinical_design_team"
+  }
+}
