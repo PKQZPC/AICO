@@ -24,7 +24,7 @@ Our vision is to move AI from a tool that only replies instantly toward a collab
 
 ## Why AICO
 
-Most AI assistants respond mainly to "the latest message." AICO explores a different direction: AI should form continuous alignment with people through long-term interaction, and then enter a cooperative state based on that alignment. For personal users, it needs to understand the user themself, their relationship network, and their everyday expression strategies. For experts, it needs to learn the expert's professional logic, service process, and decision style.
+Existing AI assistants often treat memory and historical interactions primarily as ways to augment context. AICO explores a different direction: AI should form continuous alignment with people through long-term interaction, and then enter a cooperative state based on that alignment. For personal users, it needs to understand the user themself, their relationship network, and their everyday expression strategies. For experts, it needs to learn the expert's professional logic, service process, and decision-making style.
 
 ```text
 Long-term interaction
