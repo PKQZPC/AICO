@@ -16,64 +16,39 @@
   <b>Technical Report:</b> Coming soon
 </p>
 
-AICO stands for **AI-human Alignment and Cooperation**. It does not simply explore how to make AI "remember more things"; it explores how AI can gradually align with people through long-term interaction, and then form more natural, reliable, and context-aware cooperation on top of that alignment.
+AICO, **AI-human Alignment and Cooperation**, is an open research framework exploring long-term human-AI collaboration.
 
-Our vision is to move AI from a tool that only replies instantly toward a collaborator that can understand people, relationships, goals, and long-term tasks shared with either personal users or professional experts. AICO focuses not only on memory storage, but on alignment and the cooperative interaction that follows: AI should know who it is serving, who it is currently interacting with, what the current relationship and goal are, and what expression or action is more appropriate next.
+It is not only concerned with preserving more historical information. It explores how AI can gradually learn to understand a person, understand relationships between people, and respond, collaborate, and act more appropriately across different goals and situations.
+
+For AICO, long-term interaction is not a passive accumulation of chat history. It is an evolving alignment process: AI needs to know whom it is working with, whom it is currently interacting with, what the current topic and relationship mean, and how a multi-turn conversation should be organized and advanced. In PERSONAL mode, AICO serves the user and their relationship world. In EXPERT mode, it aligns with an expert's professional logic, service style, and decision process, while assisting interaction with clients.
 
 ---
 
 ## Why AICO
 
-Existing AI assistants often treat memory and historical interactions primarily as ways to augment context. AICO explores a different direction: AI should form continuous alignment with people through long-term interaction, and then enter a cooperative state based on that alignment. For personal users, it needs to understand the user themself, their relationship network, and their everyday expression strategies. For experts, it needs to learn the expert's professional logic, service process, and decision-making style.
+Many AI systems can already preserve preferences, extract facts, retrieve history, or inject long-term memory into context. AICO aims to take a further step: make this long-term information participate in dialogue judgment and organization, so AI knows not only what happened before, but also how to collaborate with people appropriately now.
 
-```text
-Long-term interaction
-  -> AI-human alignment
-  -> personal or expert cooperation
-  -> relationship-aware context
-  -> strategy-guided dialogue
-  -> feedback-driven evolution
-```
+## The Change AICO Seeks
 
-AICO focuses on four questions:
-
-| Question | Meaning |
+| Direction | The Capability AICO Pursues |
 |---|---|
-| Who is the aligned subject? | The user themself in PERSONAL mode, or the expert in EXPERT mode. |
-| Who is the current interaction partner? | A friend, family member, colleague, self-dialogue partner, or client. |
-| What is the current topic and multi-turn purpose? | The dynamic topic, intent, relation context, and dialogue stage. |
-| How should AI cooperate and iterate? | Profiles, relationship graph, knowledge, strategy trees, and confirmation records are continuously updated during cooperation. |
+| `01` From factual continuity to behavioral continuity | AI does not only remember that someone “prefers concise messages.” It also considers relationship stage, the current topic, and implicit interaction goals to choose a more appropriate tone, pace, and boundary. |
+| `02` From single-turn relevance to multi-turn strategy | When a conversation has stages and a purpose, AI does not simply answer sentence by sentence. It can organize the dialogue through a strategy tree: understand context, build common ground, enter the core request, and adjust its path from real feedback. |
+| `03` From static personalization to negotiated co-evolution | Alignment is not AI privately defining a person. In PERSONAL mode, it is calibrated through AI, the user, partner feedback, and interaction outcomes. In EXPERT mode, the expert has final authority over their logic tree, profile, and rules. |
+| `04` From fragmented memories to a relationship world model | Interactions with different people form an owner-private relationship graph. When talking with A, the system reads the local, relationally connected context around A rather than indiscriminately injecting all history. |
 
----
+## From Alignment to Cooperation
 
-## Core Idea
-
-AICO is built around an "alignment-cooperation-iteration" loop: the system first updates its understanding of people from interaction, then reads back relevant context in the next interaction to support more appropriate replies, suggestions, or expert decisions.
-
-```text
-WRITE -- update alignment state                     READ -- generate aligned context
-──────────────────────────────────────              ─────────────────────────────────────
-chat message   -> structured extraction             user query     -> context routing
-feedback       -> patch + merge                     relationship   -> subgraph retrieval
-expert edit    -> confirmation record               topic          -> tree selection
-interaction    -> graph / tree evolution            strategy node  -> response guidance
+```mermaid
+flowchart LR
+    I[Long-term interaction] --> A[Alignment model<br/>people, relationships, topics, goals, expert logic]
+    A --> S[Strategy organization<br/>relationship subgraph, topic graph, strategy tree, RAG]
+    S --> C[Cooperative interaction<br/>reply, recommendation, or professional decision]
+    C --> F[Feedback and confirmation<br/>user, interaction partner, expert, system]
+    F --> A
 ```
 
-### Write
-
-1. Normalize the mode, aligned subject, interaction partner, conversation, and message.
-2. Extract dynamic topics from dialogue instead of selecting from fixed scene labels.
-3. Update personal, expert, client-service, and relationship states through structured patches.
-4. Select, reuse, extend, or create a strategy tree for the current topic and relationship context.
-5. Record confirmation sources from AI, user, expert, or system.
-
-### Read
-
-1. Retrieve the aligned subject profile.
-2. Retrieve the current topic and related strategy tree.
-3. In PERSONAL mode, retrieve the owner-private relationship subgraph around the current partner.
-4. In EXPERT mode, retrieve the expert profile and client service profile.
-5. Build compact context for response generation or expert decision support.
+This loop turns long-term interaction into evidence for the next act of cooperation. AICO focuses on four questions: who is being aligned with, who is the current interaction partner, what the topic and multi-turn purpose are, and how AI can cooperate and evolve while respecting clear authority and confirmation sources.
 
 ---
 
