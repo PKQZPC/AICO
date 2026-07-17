@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.message;
+package com.project.smart_intervention.message;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.expert;
+package com.project.smart_intervention.expert;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.project.smart_intervention.chat.ChatConstant;
@@ -62,8 +62,10 @@ public class ExpertServiceImpl extends ServiceImpl<ExpertMapper, Expert> impleme
         if (expert == null) {
             throw new ExpertException(ExpertConstant.NOT_EXIST_ERROR);
         }
-        // 2. 鏍规嵁id鏌ヨ鎵€鏈変細璇?        List<Chat> chats = chatService.query().eq("expert_id", expert.getId()).list();
-        // 濡傛灉涓虹┖锛岀洿鎺ヨ繑鍥?        if (chats == null || chats.isEmpty()) {
+        // 2. 鏍规嵁id鏌ヨ鎵€鏈変細璇?
+        List<Chat> chats = chatService.query().eq("expert_id", expert.getId()).list();
+        // 濡傛灉涓虹┖锛岀洿鎺ヨ繑鍥?
+        if (chats == null || chats.isEmpty()) {
             return Collections.emptyList();
         }
         // 鏌ヨ鎵€鏈夌殑瀹堕暱鍚嶅瓧
@@ -81,7 +83,8 @@ public class ExpertServiceImpl extends ServiceImpl<ExpertMapper, Expert> impleme
     }
 
     public SendMessageDTO sendMessage(SendMessageRequest request) {
-        // 1. 鑾峰彇浼氳瘽锛屾煡璇㈡槸鍚﹀瓨鍦?        Chat chat = chatService.query().eq("id", request.getChatId()).one();
+        // 1. 鑾峰彇浼氳瘽锛屾煡璇㈡槸鍚﹀瓨鍦?
+        Chat chat = chatService.query().eq("id", request.getChatId()).one();
         if (chat == null) {
             throw new ChatException(ChatConstant.CHAT_NOT_EXIST_ERROR);
         }

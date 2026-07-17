@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.parent;
+package com.project.smart_intervention.parent;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.project.smart_intervention.entity.dto.ChatDTO;

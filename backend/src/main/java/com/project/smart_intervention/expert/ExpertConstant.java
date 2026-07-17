@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.expert;
+package com.project.smart_intervention.expert;
 
 /**
  * @ClassName: ExpertConstant

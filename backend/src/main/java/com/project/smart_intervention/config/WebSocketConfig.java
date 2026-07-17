@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.config;
+package com.project.smart_intervention.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

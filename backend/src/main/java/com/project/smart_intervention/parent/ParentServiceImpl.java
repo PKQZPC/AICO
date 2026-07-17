@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.parent;
+package com.project.smart_intervention.parent;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.project.smart_intervention.chat.ChatConstant;
@@ -75,8 +75,10 @@ public class ParentServiceImpl extends ServiceImpl<ParentMapper, Parent> impleme
         if (parent == null) {
             throw new ParentException(ParentConstant.USER_NOT_EXIST_ERROR);
         }
-        // 2. 鏍规嵁id鏌ヨ鎵€鏈変細璇?        List<Chat> chats = chatService.query().eq("parent_id", parentId).list();
-        // 濡傛灉涓虹┖锛岀洿鎺ヨ繑鍥?        if (chats == null || chats.isEmpty()) {
+        // 2. 鏍规嵁id鏌ヨ鎵€鏈変細璇?
+        List<Chat> chats = chatService.query().eq("parent_id", parentId).list();
+        // 濡傛灉涓虹┖锛岀洿鎺ヨ繑鍥?
+        if (chats == null || chats.isEmpty()) {
             return List.of();
         }
         // 鏌ヨ鎵€鏈夌殑涓撳
@@ -98,7 +100,8 @@ public class ParentServiceImpl extends ServiceImpl<ParentMapper, Parent> impleme
      * @return
      */
     public SendMessageDTO sendMessage(SendMessageRequest request) {
-        // 1. 鑾峰彇浼氳瘽锛屾煡璇㈡槸鍚﹀瓨鍦?        Chat chat = chatService.query().eq("id", request.getChatId()).one();
+        // 1. 鑾峰彇浼氳瘽锛屾煡璇㈡槸鍚﹀瓨鍦?
+        Chat chat = chatService.query().eq("id", request.getChatId()).one();
         if (chat == null) {
             throw new ChatException(ChatConstant.CHAT_NOT_EXIST_ERROR);
         }

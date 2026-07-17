@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.message;
+package com.project.smart_intervention.message;
 
 /**
  * @ClassName: MessageConstant
@@ -16,6 +16,7 @@ public class MessageConstant {
     public static final String BOT_IDENTITY = "bot";
     public static final String EXPERT_IDENTITY = "expert";
     public static final String SEND_MESSAGE_ERROR = "鍙戦€佹秷鎭け璐?";
-    // TODO 杩欓噷閮借鏀?    public static final Integer DEFAULT_MESSAGE_TYPE = 0;
+    // TODO 杩欓噷閮借鏀?
+    public static final Integer DEFAULT_MESSAGE_TYPE = 0;
     public static final Integer DEFAULT_MESSAGE_CATEGORY = 0;
 }

@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.config;
+package com.project.smart_intervention.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -24,7 +24,8 @@ public class JacksonConfig {
         ObjectMapper mapper = new ObjectMapper();
         // 娉ㄥ唽Java 8鏃堕棿妯″潡
         mapper.registerModule(new JavaTimeModule());
-        // 绂佺敤鏃ユ湡鏃堕棿鎴虫牸寮?        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        // 绂佺敤鏃ユ湡鏃堕棿鎴虫牸寮?
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         // 璁剧疆鏃跺尯
         mapper.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return mapper;

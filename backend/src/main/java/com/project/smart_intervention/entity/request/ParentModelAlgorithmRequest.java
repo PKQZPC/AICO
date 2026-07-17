@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.request;
+package com.project.smart_intervention.entity.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

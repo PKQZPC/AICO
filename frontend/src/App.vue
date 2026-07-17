@@ -1,83 +1,42 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <RouterView />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
-
 <style>
-html, body, #app {
-  width: 100vw;
-  height: 100vh;
+:root {
+  --aico-ink: #14201e;
+  --aico-teal: #0f5c56;
+  --aico-teal-deep: #0a3d39;
+  --aico-mist: #e8f2ef;
+  --aico-sand: #f3f6f4;
+  --aico-coral: #e85d3c;
+  --aico-line: rgba(20, 32, 30, 0.12);
+  --aico-muted: #5a6b67;
+  /* 正常黑体 */
+  --font-display: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Noto Sans SC", SimHei, sans-serif;
+  --font-body: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Noto Sans SC", SimHei, sans-serif;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-height: 100vh;
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
-  background: #f5f7fa;
+  background: var(--aico-sand);
+  color: var(--aico-ink);
+  font-family: var(--font-body);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 </style>

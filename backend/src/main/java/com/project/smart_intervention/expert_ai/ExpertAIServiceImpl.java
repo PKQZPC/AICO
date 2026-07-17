@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.expert_ai;
+package com.project.smart_intervention.expert_ai;
 
 import com.project.smart_intervention.chat.ChatConstant;
 import com.project.smart_intervention.chat.ChatServiceImpl;
@@ -69,7 +69,8 @@ public class ExpertAIServiceImpl implements ExpertAIService {
         if (chat == null) {
             throw new ChatException(ChatConstant.CHAT_NOT_EXIST_ERROR);
         }
-        // 杩炲悓娑堟伅涓€骞跺彂閫?        rabbitTemplate.convertAndSend(RabbitConfig.GET_RECOMMEND_MESSAGE_QUEUE, chat);
+        // 杩炲悓娑堟伅涓€骞跺彂閫?
+        rabbitTemplate.convertAndSend(RabbitConfig.GET_RECOMMEND_MESSAGE_QUEUE, chat);
     }
 
     /**
@@ -79,7 +80,8 @@ public class ExpertAIServiceImpl implements ExpertAIService {
      */
     @Transactional
     public void adoptMessage(Integer chatId, SendMessageRequest request) {
-        // 涓撳鍙戦€佹秷鎭?        expertService.sendMessage(request);
+        // 涓撳鍙戦€佹秷鎭?
+        expertService.sendMessage(request);
         // 鍚屾椂鍒犻櫎AI娑堟伅
         recommendMessageMapper.deleteByChatId(request.getChatId());
     }

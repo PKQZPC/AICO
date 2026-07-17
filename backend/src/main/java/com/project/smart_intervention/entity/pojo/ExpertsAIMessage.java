@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.pojo;
+package com.project.smart_intervention.entity.pojo;
 
 import cn.hutool.db.meta.TableType;
 import com.baomidou.mybatisplus.annotation.IdType;

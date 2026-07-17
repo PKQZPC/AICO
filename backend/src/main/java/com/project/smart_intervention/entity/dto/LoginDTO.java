@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.dto;
+package com.project.smart_intervention.entity.dto;
 
 import com.project.smart_intervention.entity.pojo.Parent;
 import lombok.AllArgsConstructor;

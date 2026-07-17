@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.message;
+package com.project.smart_intervention.message;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.project.smart_intervention.entity.pojo.ExpertsAIMessage;

@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.chat;
+package com.project.smart_intervention.chat;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.project.smart_intervention.entity.constant.SystemConstant;
@@ -84,7 +84,8 @@ public class ChatFacadeService {
         if (expert == null) {
             throw new ExpertException(ExpertConstant.NOT_EXIST_ERROR);
         }
-        // 3. 鏌ヨ鎴愬姛锛岃繘琛屽皝瑁?        Chat chat = ChatFactory.createChat(parentId, expertId);
+        // 3. 鏌ヨ鎴愬姛锛岃繘琛屽皝瑁?
+        Chat chat = ChatFactory.createChat(parentId, expertId);
         boolean isSaved = chatService.save(chat);
         if (!isSaved) {
             throw new ChatException(ChatConstant.SAVE_CHAT_ERROR);
@@ -105,7 +106,8 @@ public class ChatFacadeService {
         if (messages == null || messages.isEmpty()) {
             return List.of();
         }
-        // 3. 灏佽锛岃繑鍥?        return messages.stream()
+        // 3. 灏佽锛岃繑鍥?
+        return messages.stream()
                 .map(MessageFactory::toMessageDTO)
                 .toList();
     }
@@ -119,8 +121,10 @@ public class ChatFacadeService {
         if (chat == null) {
             throw new ChatException(ChatConstant.CHAT_NOT_EXIST_ERROR);
         }
-        // 2. 鏌ヨ鐘舵€?        Integer chatState = chat.getChatState();
-        // 3. 鏍规嵁鐘舵€佷笉鍚岋紝淇敼鐘舵€?        // 濡傛灉鏄疉I鎵樼鎴栬€呮槸涓撳寰呬粙鍏ワ紝鍒欎慨鏀逛负浼氳瘽杩涜涓?        if (chatState.equals(ChatConstant.AI_HOSTING_STATUS)
+        // 2. 鏌ヨ鐘舵€?
+        Integer chatState = chat.getChatState();
+        // 3. 鏍规嵁鐘舵€佷笉鍚岋紝淇敼鐘舵€?        // 濡傛灉鏄疉I鎵樼鎴栬€呮槸涓撳寰呬粙鍏ワ紝鍒欎慨鏀逛负浼氳瘽杩涜涓?
+        if (chatState.equals(ChatConstant.AI_HOSTING_STATUS)
                 || chatState.equals(ChatConstant.SPECIALIST_TO_BE_INTERVENED_STATUS)) {
             chat.setChatState(ChatConstant.LIVE_CONVERSATIONS_STATUS);
         } else if (chatState.equals(ChatConstant.LIVE_CONVERSATIONS_STATUS)) {
@@ -128,7 +132,8 @@ public class ChatFacadeService {
         } else {
             throw new ChatException(ChatConstant.PUT_STATUS_ERROR);
         }
-        // 4. 鏇存柊浼氳瘽鐘舵€?        boolean isUpdated = chatService.updateById(chat);
+        // 4. 鏇存柊浼氳瘽鐘舵€?
+        boolean isUpdated = chatService.updateById(chat);
         if (!isUpdated) {
             throw new ChatException(ChatConstant.PUT_STATUS_ERROR);
         }
@@ -147,7 +152,8 @@ public class ChatFacadeService {
         }
         // 1. 鏌ヨ浼氳瘽
         Chat chat = chatService.query().eq("id", chatId).one();
-        // 2. 淇敼鍊间笉涓虹┖鐨勫€?        if (readTimestampExpert != null) {
+        // 2. 淇敼鍊间笉涓虹┖鐨勫€?
+        if (readTimestampExpert != null) {
             chat.setLastReadTimestampExpert(readTimestampExpert);
         } else {
             chat.setLastReadTimestampParent(readTimestampParent);
@@ -191,7 +197,8 @@ public class ChatFacadeService {
         if (messages == null || messages.isEmpty()) {
             messages = List.of();
         }
-        // 3. 鏌ヨ涓撳涓嶢I鐨勪細璇濊褰?        List<ExpertsAIMessage> expertsAIMessages = expertsAIMessageService.query().eq("chat_id", chatId).list();
+        // 3. 鏌ヨ涓撳涓嶢I鐨勪細璇濊褰?
+        List<ExpertsAIMessage> expertsAIMessages = expertsAIMessageService.query().eq("chat_id", chatId).list();
         if (expertsAIMessages == null || expertsAIMessages.isEmpty()) {
             expertsAIMessages = List.of();
         }
@@ -232,7 +239,8 @@ public class ChatFacadeService {
     }
 
     private void enrichParentModelResponse(ParentModelResponse result) {
-        String featureText = String.join("锛?,
+        String featureText = String.join(
+                " | ",
                 safeText(result.getProfile()),
                 safeText(result.getEventSummary()),
                 safeText(result.getReplyStrategy())
@@ -252,14 +260,18 @@ public class ChatFacadeService {
                 "replyStrategy", safeText(result.getReplyStrategy()),
                 "eventSummary", safeText(result.getEventSummary())
         ));
-        result.setRelationshipContext("鐢?April ParentModel 鐨勪簨浠舵€荤粨鍜岀敾鍍忓瓧娈佃緟鍔╁垽鏂?);
+        result.setRelationshipContext("Derived from April ParentModel event summary and profile fields.");
         result.setCommunicationStyle(featureText.length() > 120 ? "detail_rich_and_context_seeking" : "concise_problem_statement");
-        result.setCognitiveStyle(featureText.contains("涓轰粈涔?) || featureText.contains("鍘熷洜") ? "cause_oriented" : "solution_oriented");
-        result.setAvoidancePattern(featureText.contains("鎷呭績") || featureText.contains("瀹虫€?) ? "risk_avoidant" : "not_obvious");
+        result.setCognitiveStyle(containsAny(featureText, "why", "cause", "reason") ? "cause_oriented" : "solution_oriented");
+        result.setAvoidancePattern(containsAny(featureText, "worry", "anxious", "fear") ? "risk_avoidant" : "not_obvious");
         result.setSensitivityPoints(List.of("avoid_blame", "protect_parent_child_relationship", "avoid_over_generalization"));
-        result.setPreferredTone(featureText.contains("鐒﹁檻") || featureText.contains("鎷呭績") ? "warm_supportive_and_reassuring" : "gentle_and_clarifying");
+        result.setPreferredTone(containsAny(featureText, "anxious", "worry") ? "warm_supportive_and_reassuring" : "gentle_and_clarifying");
         result.setQuestioningStrategy(inferQuestioningStrategy(featureText));
-        result.setAvoidanceGuidelines(List.of("涓嶈杩囨棭涓嬭瘖鏂垨褰掑洜", "涓嶈鍚﹀畾 client 鐨勬劅鍙?, "涓嶈鐩存帴鎶婇棶棰樺綊鍜庝簬瀛╁瓙鎴栧闀?));
+        result.setAvoidanceGuidelines(List.of(
+                "do_not_diagnose_too_early",
+                "do_not_deny_client_feelings",
+                "do_not_blame_child_or_parent"
+        ));
         result.setNextBestQuestion(inferNextBestQuestion(featureText));
         result.setPermissionBoundary(Map.of(
                 "usedForExpertReply", true,
@@ -274,45 +286,63 @@ public class ChatFacadeService {
         return value == null ? "" : value;
     }
 
+    private boolean containsAny(String text, String... needles) {
+        String lower = text == null ? "" : text.toLowerCase();
+        for (String needle : needles) {
+            if (lower.contains(needle.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private String inferCurrentNeed(String text) {
-        if (text.contains("鎬庝箞鍔?) || text.contains("鎬庝箞")) return "闇€瑕佸叿浣撴矡閫氫笌琛屽姩绛栫暐";
-        if (text.contains("鎷呭績") || text.contains("鐒﹁檻")) return "闇€瑕佹儏缁壙鎺ヤ笌椋庨櫓婢勬竻";
-        if (text.contains("鍐茬獊") || text.contains("鍚?)) return "闇€瑕佸叧绯讳慨澶嶄笌鍐茬獊闄嶇骇";
-        return "闇€瑕佷笓瀹惰繘涓€姝ユ緞娓呭綋鍓嶉棶棰?;
+        if (containsAny(text, "how", "what should")) return "needs concrete communication and action strategies";
+        if (containsAny(text, "worry", "anxious")) return "needs emotional validation and risk clarification";
+        if (containsAny(text, "conflict", "argue", "fight")) return "needs relationship repair and de-escalation";
+        return "needs expert clarification of the current problem";
     }
 
     private String inferPresentingProblem(String text) {
-        if (text.contains("瀛︿範") || text.contains("浣滀笟")) return "瀛︿範/浣滀笟鐩稿叧鍥版壈";
-        if (text.contains("鎵嬫満") || text.contains("娓告垙")) return "鐢靛瓙浜у搧鎴栨父鎴忎娇鐢ㄥ洶鎵?;
-        if (text.contains("娌熼€?) || text.contains("鍐茬獊") || text.contains("鍚?)) return "瀹跺涵娌熼€氫笌鍏崇郴鍐茬獊";
-        if (text.contains("鐒﹁檻") || text.contains("鎷呭績") || text.contains("鍘嬪姏")) return "鎯呯华鍘嬪姏涓庢媴蹇?;
-        return "寰呰繘涓€姝ユ緞娓呯殑闂";
+        if (containsAny(text, "study", "homework", "school")) return "learning/homework related difficulty";
+        if (containsAny(text, "phone", "game")) return "device or game usage conflict";
+        if (containsAny(text, "conflict", "argue", "fight")) return "family communication conflict";
+        if (containsAny(text, "worry", "anxious", "pressure")) return "emotional pressure and worry";
+        return "problem pending further clarification";
     }
 
     private String inferEmotionState(String text) {
-        if (text.contains("鐒﹁檻") || text.contains("鎷呭績") || text.contains("瀹虫€?)) return "anxious";
-        if (text.contains("鐢熸皵") || text.contains("鎰ゆ€?)) return "angry";
-        if (text.contains("闅捐繃") || text.contains("浣庤惤") || text.contains("鏃犲姪")) return "sad";
+        if (containsAny(text, "worry", "anxious", "fear")) return "anxious";
+        if (containsAny(text, "angry", "mad")) return "angry";
+        if (containsAny(text, "sad", "hopeless", "helpless")) return "sad";
         return "unclear_or_neutral";
     }
 
     private List<String> inferRiskSignals(String text) {
-        if (text.contains("鑷激") || text.contains("杞荤敓") || text.contains("浼ゅ")) return List.of("self_harm_or_harm_signal");
-        if (text.contains("澶辨帶") || text.contains("鏆村姏")) return List.of("conflict_escalation");
-        if (text.contains("涓嶄笂瀛?) || text.contains("閫冨")) return List.of("school_function_impairment");
+        if (containsAny(text, "self-harm", "suicide", "hurt")) return List.of("self_harm_or_harm_signal");
+        if (containsAny(text, "out of control", "violence")) return List.of("conflict_escalation");
+        if (containsAny(text, "dropout", "refuse school")) return List.of("school_function_impairment");
         return List.of("no_explicit_high_risk_signal");
     }
 
     private String inferQuestioningStrategy(String text) {
-        if (text.contains("鍐茬獊") || text.contains("鍚?)) return "鍏堥棶鏈€杩戜竴娆″叿浣撳啿绐佸満鏅紝鍐嶉棶鍙屾柟璇翠簡浠€涔堝拰鎯呯华鍙樺寲";
-        if (text.contains("瀛︿範") || text.contains("浣滀笟")) return "鍏堥棶浣滀笟鍙戠敓鐨勫叿浣撴椂闂淬€佷换鍔￠毦搴︺€佸瀛愬弽搴斿拰瀹堕暱搴斿";
-        return "鍏堟緞娓呮渶杩戜竴娆″叿浣撲簨浠躲€佸綋浜嬩汉鍙嶅簲鍜岀敤鎴锋湡寰?;
+        if (containsAny(text, "conflict", "argue", "fight")) {
+            return "Ask about the latest concrete conflict scene, then what each person said and how emotions changed.";
+        }
+        if (containsAny(text, "study", "homework", "school")) {
+            return "Ask about homework timing, task difficulty, child reaction, and parent response.";
+        }
+        return "Clarify the latest concrete event, reactions of people involved, and what the user hopes for.";
     }
 
     private String inferNextBestQuestion(String text) {
-        if (text.contains("瀛︿範") || text.contains("浣滀笟")) return "鏈€杩戜竴娆′綔涓氬崱浣忔椂锛屽瀛愬叿浣撹浜嗕粈涔堛€佷綘褰撴椂鎬庝箞鍥炲簲锛?;
-        if (text.contains("鍐茬獊") || text.contains("鍚?)) return "鏈€杩戜竴娆″啿绐佹槸浠庡摢鍙ヨ瘽寮€濮嬪崌绾х殑锛?;
-        return "鑳戒笉鑳藉厛璁蹭竴涓渶杩戝彂鐢熺殑鍏蜂綋鍦烘櫙锛?;
+        if (containsAny(text, "study", "homework", "school")) {
+            return "In the latest homework stuck moment, what exactly did the child say and how did you respond?";
+        }
+        if (containsAny(text, "conflict", "argue", "fight")) {
+            return "Which sentence started the latest conflict escalation?";
+        }
+        return "Can we start with one recent concrete scene?";
     }
 
     private LocalDateTime getLastMessageTime(List<Message> messages) {
@@ -322,7 +352,8 @@ public class ChatFacadeService {
                 .toList();
         int size = longList.size();
         Long timestamp = longList.get(size - 1);
-        // 鏂规硶1锛氭槑纭寚瀹氭椂鍖猴紙鎺ㄨ崘锛?        ZoneId zone = ZoneId.of("Asia/Shanghai"); // 鎴?ZoneId.systemDefault()
+        // 鏂规硶1锛氭槑纭寚瀹氭椂鍖猴紙鎺ㄨ崘锛?
+        ZoneId zone = ZoneId.of("Asia/Shanghai"); // 鎴?ZoneId.systemDefault()
         return LocalDateTime.ofInstant(
                 Instant.ofEpochSecond(timestamp),
                 ZoneId.of("Asia/Shanghai")

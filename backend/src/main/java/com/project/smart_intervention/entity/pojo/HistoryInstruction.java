@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.pojo;
+package com.project.smart_intervention.entity.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

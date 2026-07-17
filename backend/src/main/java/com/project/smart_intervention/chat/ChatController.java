@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.chat;
+package com.project.smart_intervention.chat;
 
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,7 +61,7 @@ public class ChatController {
      */
     @PutMapping("/{chatId}/status")
     public Result<String> putStatus(@PathVariable("chatId") Integer chatId) {
-        log.info("鏇存敼浼氳瘽鐘舵€?);
+        log.info("鏇存敼浼氳瘽鐘舵€?");
         chatService.putStatus(chatId);
         return Result.success(ChatConstant.PUT_STATUS_SUCCESS);
     }

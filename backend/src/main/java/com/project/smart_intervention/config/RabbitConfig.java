@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.config;
+package com.project.smart_intervention.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
@@ -38,7 +38,10 @@ public class RabbitConfig {
     @Bean
     public Queue sendMessageQueue() {
         return QueueBuilder.durable(RabbitConfig.SEND_MESSAGE_QUEUE)
-                .withArgument("x-message-ttl", 60000) // 璁剧疆娑堟伅杩囨湡鏃堕棿锛屽崟浣嶆绉?                .withArgument("x-dead-letter-exchange", "") // 绌哄瓧绗︿覆琛ㄧず榛樿浜ゆ崲鏈?                .withArgument("x-dead-letter-routing-key", "deadSendMessageQueue")  // 鐩存帴璺敱鍒版淇￠槦鍒?                .build();
+                .withArgument("x-message-ttl", 60000)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", "deadSendMessageQueue")
+                .build();
     }
 
     @Bean

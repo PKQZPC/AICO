@@ -172,7 +172,6 @@ public class AicoAlignmentServiceImpl implements AlignmentService {
         subject.put("lastMessage", normalize(request.getMessage(), ""));
         subject.put("updatedAt", LocalDateTime.now().toString());
         state.getStableProfile().put("alignedSubject", subject);
-        updateRelationshipEdgeDetails(state, request);
         appendLimited(state.getRecentObservations(), normalize(request.getMessage(), ""), 20);
     }
 

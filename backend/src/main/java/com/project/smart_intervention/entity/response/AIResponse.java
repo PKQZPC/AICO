@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.response;
+package com.project.smart_intervention.entity.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.smart_intervention.entity.dto.MessageDTO;

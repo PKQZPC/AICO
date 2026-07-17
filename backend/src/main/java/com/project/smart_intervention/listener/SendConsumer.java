@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.listener;
+package com.project.smart_intervention.listener;
 
 import com.project.smart_intervention.chat.ChatConstant;
 import com.project.smart_intervention.chat.IChatService;
@@ -69,7 +69,8 @@ public class SendConsumer {
 
     @RabbitListener(queues = RabbitConfig.SEND_INSTRUCTION_QUEUE)
     public void handleSendInstruction(ExpertsAIMessage message) {
-        // TODO 杩欓噷闇€瑕佽皟鐢ㄦ帴鍙ｇ粰AI鍙戦€佹寚绀?        listenerUtils.sendInstruction(message);
+        // TODO 杩欓噷闇€瑕佽皟鐢ㄦ帴鍙ｇ粰AI鍙戦€佹寚绀?
+        listenerUtils.sendInstruction(message);
     }
 
     @SneakyThrows

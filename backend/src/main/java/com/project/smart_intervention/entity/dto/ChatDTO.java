@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.dto;
+package com.project.smart_intervention.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +24,7 @@ public class ChatDTO {
     private Long expertId;          // 涓撳ID
     private String name;          // 涓撳ID
     private LocalDateTime createdAt; // 浼氳瘽鍒涘缓鏃堕棿
-    private String lastMessage; // 鏈€鍚庝竴鏉′細璇?    private LocalDateTime lastMessageTimestamp; // 鏈€鍚庝竴鏉℃秷鎭椂闂?    private Integer status;         // 瀵硅瘽鐘舵€侊紙0-AI鎵樼锛?-涓撳寰呬粙鍏ワ紝2-涓撳宸蹭粙鍏ワ級
+    private String lastMessage; // 鏈€鍚庝竴鏉′細璇?
+    private LocalDateTime lastMessageTimestamp; // 鏈€鍚庝竴鏉℃秷鎭椂闂?
+    private Integer status;         // 瀵硅瘽鐘舵€侊紙0-AI鎵樼锛?-涓撳寰呬粙鍏ワ紝2-涓撳宸蹭粙鍏ワ級
 }

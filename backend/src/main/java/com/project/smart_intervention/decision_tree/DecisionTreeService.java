@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.decision_tree;
+package com.project.smart_intervention.decision_tree;
 
 import com.project.smart_intervention.config.RabbitConfig;
 import com.project.smart_intervention.entity.request.UpdateTreeRequest;

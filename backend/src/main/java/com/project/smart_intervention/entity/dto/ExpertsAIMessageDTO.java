@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.dto;
+package com.project.smart_intervention.entity.dto;
 
 import lombok.Builder;
 import lombok.Data;

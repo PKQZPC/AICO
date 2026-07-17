@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.parent_model;
+package com.project.smart_intervention.parent_model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

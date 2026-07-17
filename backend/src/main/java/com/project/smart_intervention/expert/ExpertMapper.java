@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.expert;
+package com.project.smart_intervention.expert;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.project.smart_intervention.entity.pojo.Expert;

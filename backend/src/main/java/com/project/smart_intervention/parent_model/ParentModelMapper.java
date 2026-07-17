@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.parent_model;
+package com.project.smart_intervention.parent_model;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;

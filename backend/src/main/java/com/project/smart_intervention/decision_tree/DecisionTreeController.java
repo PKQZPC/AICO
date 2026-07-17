@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.decision_tree;
+package com.project.smart_intervention.decision_tree;
 
 import com.project.smart_intervention.entity.constant.SuccessConstant;
 import com.project.smart_intervention.entity.pojo.Result;

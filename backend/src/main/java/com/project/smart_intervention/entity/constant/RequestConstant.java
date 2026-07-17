@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.constant;
+package com.project.smart_intervention.entity.constant;
 
 /**
  * @ClassName: RequestConstant

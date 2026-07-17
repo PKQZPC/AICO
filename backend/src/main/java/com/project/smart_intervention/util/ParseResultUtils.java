@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.util;
+package com.project.smart_intervention.util;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;

@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.message;
+package com.project.smart_intervention.message;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.project.smart_intervention.entity.pojo.Message;
@@ -14,6 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MessageMapper extends BaseMapper<Message> {
 
-    @Delete("delete from smart_intervention.message_info where chat_id = #{chatId};")
+    @Delete("delete from message_info where chat_id = #{chatId}")
     boolean deleteByChatId(Integer chatId);
 }

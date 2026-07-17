@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.util;
+package com.project.smart_intervention.util;
 
 import com.project.smart_intervention.entity.dto.ExpertsAIMessageDTO;
 import com.project.smart_intervention.entity.dto.MessageDTO;

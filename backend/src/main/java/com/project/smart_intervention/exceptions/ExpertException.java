@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.exceptions;
+package com.project.smart_intervention.exceptions;
 
 /**
  * @ClassName: ExpertException

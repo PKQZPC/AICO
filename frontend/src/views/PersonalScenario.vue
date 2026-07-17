@@ -1,53 +1,32 @@
 <template>
-  <main class="scenario-page">
-    <section class="workspace">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">PERSONAL MODE</p>
-          <h1>个人 AICO 工作台</h1>
-          <p class="summary">
-            每个用户都是自己长期对齐系统的 owner，也拥有完整的“专家式”工作台能力。
-          </p>
+  <main class="scenario">
+    <div class="bg" aria-hidden="true"></div>
+    <header class="bar">
+      <button class="ghost" type="button" @click="go('/login')">← 返回登录</button>
+      <strong class="logo">AICO</strong>
+      <span class="badge">PERSONAL</span>
+    </header>
+
+    <section class="shell">
+      <div class="hero-panel">
+        <p class="brand">AICO</p>
+        <h1>个人对齐工作台</h1>
+        <p class="summary">
+          你是长期对齐主体。在这里管理画像、关系网络、话题图谱与多轮协作策略。
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="primary" @click="go('/personal-workbench')">进入完整工作台</button>
+          <button type="button" class="secondary" @click="go('/aico-alignment')">查看对齐状态</button>
         </div>
-      </header>
+      </div>
 
-      <section class="mode-grid">
-        <article class="mode-panel">
-          <h2>我的长期对齐</h2>
-          <p>查看和确认个人画像、关系画像、偏好记忆、topic graph 与策略树候选。</p>
-          <button @click="go('/aico-alignment')">打开对齐工作台</button>
+      <div class="lanes">
+        <article v-for="item in lanes" :key="item.title" class="lane">
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.desc }}</p>
+          <button type="button" @click="go(item.path)">{{ item.cta }}</button>
         </article>
-
-        <article class="mode-panel">
-          <h2>我的策略树</h2>
-          <p>个人模式也需要 Dialogue Strategy Tree，用于组织目的型聊天、关系修复、日常表达等多轮对话。</p>
-          <button @click="go('/decision-tree')">打开策略树编辑器</button>
-        </article>
-
-        <article class="mode-panel">
-          <h2>我的对话空间</h2>
-          <p>进入个人 self/peer 多关系对话入口，用于组织自己、朋友、家人、同事等不同对象的长期对话策略。</p>
-          <button @click="go('/personal-workbench')">进入完整工作台</button>
-        </article>
-      </section>
-
-      <section class="definition">
-        <h2>PERSONAL 与专家场景的区别</h2>
-        <div class="definition-grid">
-          <div>
-            <h3>确认权</h3>
-            <p>候选 topic、关系描述和策略树由 AI 主动生成，可形成 AI 确认；正式固化时需要标清用户确认、AI 确认或待确认状态。</p>
-          </div>
-          <div>
-            <h3>扩展权</h3>
-            <p>AI 可以更主动地生成候选树和候选分支，但需要保留用户编辑、删除和拒绝入口。</p>
-          </div>
-          <div>
-            <h3>对齐目标</h3>
-            <p>长期理解用户本人、不同关系对象、表达偏好和日常多轮对话策略。</p>
-          </div>
-        </div>
-      </section>
+      </div>
     </section>
   </main>
 </template>
@@ -56,97 +35,185 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const go = (path) => router.push(path)
 
-const go = (path) => {
-  router.push(path)
-}
+const lanes = [
+  {
+    title: '长期对齐',
+    desc: '确认个人画像、关系边、偏好记忆与确认来源。',
+    cta: '打开对齐工作台',
+    path: '/aico-alignment'
+  },
+  {
+    title: '策略树',
+    desc: '组织目的型聊天、关系修复与日常表达的多轮路径。',
+    cta: '打开策略树',
+    path: '/decision-tree'
+  },
+  {
+    title: '对话空间',
+    desc: '面向自己、朋友、家人、同事的关系化协作入口。',
+    cta: '进入对话空间',
+    path: '/personal-workbench'
+  }
+]
 </script>
 
 <style scoped>
-.scenario-page {
+.scenario {
+  position: relative;
   min-height: 100vh;
-  background: #f4f6f8;
-  color: #17202a;
+  overflow: hidden;
+  color: var(--aico-ink);
+  background: linear-gradient(160deg, #f6fbf9, #e4efe9 55%, #d7e8e1);
 }
 
-.workspace {
-  width: min(1180px, calc(100vw - 40px));
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(700px 380px at 80% 0%, rgba(15, 92, 86, 0.18), transparent 60%),
+    linear-gradient(rgba(20, 32, 30, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 32, 30, 0.03) 1px, transparent 1px);
+  background-size: auto, 42px 42px, 42px 42px;
+  pointer-events: none;
+}
+
+.bar,
+.shell {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 32px 0;
 }
 
-.hero {
-  background: #ffffff;
-  border: 1px solid #dbe1e7;
-  border-radius: 8px;
-  padding: 28px;
-  margin-bottom: 18px;
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 0 0;
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: #206bc4;
-  font-size: 13px;
+.logo {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.badge {
+  margin-left: auto;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(15, 92, 86, 0.1);
+  color: var(--aico-teal-deep);
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
-h1,
-h2,
-h3,
-p {
-  margin-top: 0;
+.ghost {
+  border: 0;
+  background: transparent;
+  color: var(--aico-muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shell {
+  padding: 36px 0 64px;
+  animation: in 0.55s ease both;
+}
+
+@keyframes in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-panel {
+  padding: 40px 0 28px;
+}
+
+.brand {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--aico-teal-deep);
+  line-height: 0.95;
 }
 
 h1 {
-  margin-bottom: 10px;
-  font-size: 30px;
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.03em;
 }
 
 .summary {
-  max-width: 760px;
-  margin-bottom: 0;
-  color: #5c6670;
+  max-width: 38rem;
+  margin: 0 0 24px;
+  color: var(--aico-muted);
+  font-size: 17px;
   line-height: 1.7;
 }
 
-.mode-grid,
-.definition-grid {
+.hero-actions,
+.lanes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lanes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  margin-top: 8px;
 }
 
-.mode-panel,
-.definition {
-  background: #ffffff;
-  border: 1px solid #dbe1e7;
-  border-radius: 8px;
-  padding: 20px;
+.lane {
+  padding: 24px 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(20, 32, 30, 0.08);
+  backdrop-filter: blur(8px);
 }
 
-.mode-panel p,
-.definition p {
-  color: #5c6670;
-  line-height: 1.7;
+.lane h2 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.lane p {
+  min-height: 3.4em;
+  margin: 0 0 18px;
+  color: var(--aico-muted);
+  line-height: 1.65;
 }
 
 button {
   border: 0;
-  border-radius: 6px;
-  padding: 10px 16px;
-  background: #206bc4;
-  color: #ffffff;
-  font-weight: 600;
+  border-radius: 999px;
+  padding: 11px 18px;
+  font: inherit;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.definition {
-  margin-top: 16px;
+.primary,
+.lane button {
+  background: var(--aico-teal);
+  color: #fff;
 }
 
-@media (max-width: 900px) {
-  .mode-grid,
-  .definition-grid {
+.secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--aico-teal-deep);
+  border: 1px solid rgba(15, 92, 86, 0.18);
+}
+
+@media (max-width: 860px) {
+  .lanes {
     grid-template-columns: 1fr;
   }
 }

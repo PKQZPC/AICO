@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.pojo;
+package com.project.smart_intervention.entity.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

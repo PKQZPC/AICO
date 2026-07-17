@@ -1,77 +1,63 @@
-﻿package com.project.smart_intervention.util;
+package com.project.smart_intervention.util;
 
-/**
- * @ClassName: HttpClientUtils
- * @Description:
- * @Date: 2025/4/8
- * @Version: 1.0
- */
-import cn.hutool.core.lang.TypeReference;
-import cn.hutool.json.JSONUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.project.smart_intervention.entity.constant.RequestConstant;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.smart_intervention.entity.constant.SystemConstant;
-import com.project.smart_intervention.entity.pojo.Result;
-import com.project.smart_intervention.entity.request.AIRequest;
-import com.project.smart_intervention.entity.request.GetModelRequest;
 import com.project.smart_intervention.entity.request.InstructionRequest;
-import com.project.smart_intervention.entity.response.AIResponse;
-import com.project.smart_intervention.entity.response.ParentModelResponse;
 import com.project.smart_intervention.entity.response.Response;
+import com.project.smart_intervention.ops.TraceContext;
 import jakarta.annotation.Resource;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
-import java.util.List;
 
 @Component
 public class HttpClientUtils {
 
+    private static final Logger log = LoggerFactory.getLogger(HttpClientUtils.class);
+
     @Resource
     private ObjectMapper objectMapper;
 
-    /**
-     * 鍙戦€丳OST璇锋眰鍒癆I绔?     * @param url 璇锋眰鍦板潃
-     * @param data 璇锋眰鏁版嵁
-     * @return
-     * @param <T>
-     * @param <R>
-     */
     public <T, R> Response<R> postToAI(String url, T data, Class<R> clazz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
+        long start = System.currentTimeMillis();
 
         try {
-            // 璁剧疆璇锋眰澶?            httpPost.setHeader("Content-Type", "application/json");
-
-            // 璁剧疆璇锋眰浣?            String jsonRequest = objectMapper.writeValueAsString(data);
+            applyTraceHeader(httpPost);
+            httpPost.setHeader("Content-Type", "application/json");
+            String jsonRequest = objectMapper.writeValueAsString(data);
             httpPost.setEntity(new StringEntity(jsonRequest, "UTF-8"));
-
-            // 鎵ц璇锋眰
+            log.info("algorithm_call_start url={}", url);
             CloseableHttpResponse response = httpClient.execute(httpPost);
+            int status = response.getStatusLine() == null ? -1 : response.getStatusLine().getStatusCode();
             HttpEntity entity = response.getEntity();
-
             if (entity != null) {
                 String result = EntityUtils.toString(entity, "UTF-8");
-                // 鍒涘缓鍙傛暟鍖栫被鍨?                JavaType type = objectMapper.getTypeFactory()
+                JavaType type = objectMapper.getTypeFactory()
                         .constructParametricType(Response.class, clazz);
-
+                log.info("algorithm_call_end url={} status={} latencyMs={}",
+                        url, status, System.currentTimeMillis() - start);
                 return objectMapper.readValue(result, type);
             }
-
-            return new Response<>(); // 杩斿洖绌哄搷搴?        } finally {
+            log.warn("algorithm_call_empty url={} status={} latencyMs={}",
+                    url, status, System.currentTimeMillis() - start);
+            return new Response<>();
+        } catch (IOException ex) {
+            log.error("algorithm_call_error url={} latencyMs={} err={}",
+                    url, System.currentTimeMillis() - start, ex.toString(), ex);
+            throw ex;
+        } finally {
             httpClient.close();
         }
     }
@@ -80,19 +66,22 @@ public class HttpClientUtils {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         String url = SystemConstant.ALGORITHM_URL_PREFIX_TWO + SystemConstant.GET_DECISION_TREE_END;
         HttpPost httpPost = new HttpPost(url);
+        long start = System.currentTimeMillis();
 
         try {
-            // 璁剧疆璇锋眰澶?            httpPost.setHeader("Content-Type", "application/json");
-
-            // 鎵ц璇锋眰
+            applyTraceHeader(httpPost);
+            httpPost.setHeader("Content-Type", "application/json");
+            log.info("algorithm_call_start url={}", url);
             CloseableHttpResponse response = httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
-
             if (entity != null) {
-                // 鍒涘缓鍙傛暟鍖栫被鍨?                return EntityUtils.toString(entity, "UTF-8");
+                String body = EntityUtils.toString(entity, "UTF-8");
+                log.info("algorithm_call_end url={} latencyMs={}", url, System.currentTimeMillis() - start);
+                return body;
             }
-
-            return ""; // 杩斿洖绌哄搷搴?        } catch (IOException e) {
+            return "";
+        } catch (IOException e) {
+            log.error("algorithm_call_error url={} err={}", url, e.toString(), e);
             throw new RuntimeException(e);
         } finally {
             httpClient.close();
@@ -100,31 +89,37 @@ public class HttpClientUtils {
     }
 
     public void updateDecisionTree(String tree) throws IOException {
-        // TODO 杩欓噷闇€瑕佽皟鐢ㄧ畻娉曠鎺ュ彛
         CloseableHttpClient httpClient = HttpClients.createDefault();
         String url = SystemConstant.ALGORITHM_URL_PREFIX_TWO + SystemConstant.SAVE_DECISION_TREE_END;
         HttpPost httpPost = new HttpPost(url);
 
         try {
-            // 璁剧疆璇锋眰澶?            httpPost.setHeader("Content-Type", "application/json");
+            applyTraceHeader(httpPost);
+            httpPost.setHeader("Content-Type", "application/json");
             httpPost.setEntity(new StringEntity(tree, "UTF-8"));
-            // 鎵ц璇锋眰
+            log.info("algorithm_call_start url={}", url);
             CloseableHttpResponse response = httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
-
             if (entity != null) {
-                // 鍒涘缓鍙傛暟鍖栫被鍨?                return;
+                log.info("algorithm_call_end url={}", url);
+                return;
             }
-
-            return; // 杩斿洖绌哄搷搴?        } catch (IOException e) {
+        } catch (IOException e) {
+            log.error("algorithm_call_error url={} err={}", url, e.toString(), e);
             throw new RuntimeException(e);
         } finally {
             httpClient.close();
         }
     }
 
-
     public void sendInstruction(InstructionRequest request) {
-        // TODO 杩欓噷鍙渶瑕佹妸璇锋眰鍙戦€佽繃鍘诲嵆鍙?    }
+        log.info("algorithm_instruction_noop");
+    }
 
+    private void applyTraceHeader(HttpPost httpPost) {
+        String traceId = TraceContext.current();
+        if (traceId != null && !traceId.isBlank()) {
+            httpPost.setHeader(TraceContext.HEADER_NAME, traceId);
+        }
+    }
 }

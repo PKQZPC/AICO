@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.expert_ai;
+package com.project.smart_intervention.expert_ai;
 
 import com.project.smart_intervention.entity.request.ExpertInstructionRequest;
 import com.project.smart_intervention.entity.request.SendMessageRequest;

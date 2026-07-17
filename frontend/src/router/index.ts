@@ -54,6 +54,16 @@ const routes = [
     path: '/aico-alignment',
     name: 'AicoAlignment',
     component: () => import('@/views/AicoAlignment.vue')
+  },
+  {
+    path: '/ops/monitor',
+    name: 'OpsMonitor',
+    component: () => import('@/views/OpsMonitor.vue')
+  },
+  {
+    path: '/ops/log-debug',
+    name: 'OpsLogDebug',
+    component: () => import('@/views/OpsLogDebug.vue')
   }
 ]
 

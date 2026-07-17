@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.chat;
+package com.project.smart_intervention.chat;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.project.smart_intervention.entity.dto.ChatDTO;

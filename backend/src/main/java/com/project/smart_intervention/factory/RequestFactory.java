@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.factory;
+package com.project.smart_intervention.factory;
 
 import com.project.smart_intervention.entity.pojo.*;
 import com.project.smart_intervention.entity.request.AIRequest;

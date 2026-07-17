@@ -1,4 +1,4 @@
-﻿package com.project.smart_intervention.entity.pojo;
+package com.project.smart_intervention.entity.pojo;
 
 /**
  * @ClassName: Result
@@ -14,21 +14,24 @@ public class Result<T> {
     private String msg;     // 娑堟伅
     private T data;         // 杩斿洖鏁版嵁
 
-    // 鎴愬姛鍝嶅簲锛堟棤鏁版嵁锛?    public static <T> Result<T> success() {
+    // 鎴愬姛鍝嶅簲锛堟棤鏁版嵁锛?
+    public static <T> Result<T> success() {
         Result<T> result = new Result<>();
         result.setCode(200);
         result.setMsg("success");
         return result;
     }
 
-    // 鎴愬姛鍝嶅簲锛堝甫鏁版嵁锛?    public static <T> Result<T> success(T data) {
+    // 鎴愬姛鍝嶅簲锛堝甫鏁版嵁锛?
+    public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
         result.setCode(200);
         result.setMsg("success");
         result.setData(data);
         return result;
     }
-    // 鎴愬姛鍝嶅簲锛堝甫鏁版嵁锛?    public static <T> Result<T> success(T data, String msg) {
+    // 鎴愬姛鍝嶅簲锛堝甫鏁版嵁锛?
+    public static <T> Result<T> success(T data, String msg) {
         Result<T> result = new Result<>();
         result.setCode(200);
         result.setMsg(msg);
@@ -52,7 +55,8 @@ public class Result<T> {
         return result;
     }
 
-    // 澶辫触鍝嶅簲锛堝甫鏁版嵁锛?    public static <T> Result<T> error(Integer code, String msg, T data) {
+    // 澶辫触鍝嶅簲锛堝甫鏁版嵁锛?
+    public static <T> Result<T> error(Integer code, String msg, T data) {
         Result<T> result = new Result<>();
         result.setCode(code);
         result.setMsg(msg);
